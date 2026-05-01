@@ -10,7 +10,7 @@
 - 提供 OAuth 刷新接口，供 alist、播放器等第三方程序调用
 - 纯本地运行，数据不经第三方服务器
 
-## 快速部署（Docker）
+## 快速部署（Docker，推荐）
 
 无需安装 Python，一行命令启动：
 
@@ -29,17 +29,46 @@ ports:
   - "8080:5800"   # 改成你想要的端口
 ```
 
-### 停止服务
+### 停止 / 更新
 
 ```bash
-docker compose down
+docker compose down      # 停止
+docker compose pull && docker compose up -d   # 更新到最新版
 ```
 
-### 更新版本
+## 源码部署
+
+### 环境要求
+
+- Python 3.10+
+- [uv](https://docs.astral.sh/uv/)（推荐）或 pip
+
+### 方式一：uv（推荐）
 
 ```bash
-docker compose pull
-docker compose up -d
+git clone git@github.com:LucasJX/alipan_tv.git
+cd alipan_tv
+uv sync
+uv run app.py
+```
+
+### 方式二：pip
+
+```bash
+git clone git@github.com:LucasJX/alipan_tv.git
+cd alipan_tv
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+.venv/bin/python app.py
+```
+
+启动后浏览器打开 http://localhost:5800
+
+可通过环境变量 `PORT` 自定义端口：
+
+```bash
+PORT=8080 uv run app.py
 ```
 
 ## 第三方程序接入
@@ -77,6 +106,19 @@ Content-Type: application/json
 - [Flask](https://flask.palletsprojects.com/) — Web 框架
 - [PyCryptodome](https://pycryptodome.readthedocs.io/) — AES 解密
 - [qrcode](https://pypi.org/project/qrcode/) — 二维码生成
+
+## 项目结构
+
+```
+alipan-tv-token/
+├── app.py              # Flask 后端（API 路由 + AES 解密）
+├── index.html          # 前端页面
+├── Dockerfile          # Docker 镜像定义
+├── docker-compose.yml  # Docker Compose 编排
+├── requirements.txt    # Python 依赖
+├── pyproject.toml      # 项目配置
+└── README.md
+```
 
 ## 致谢
 
