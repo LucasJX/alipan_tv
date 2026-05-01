@@ -1,6 +1,6 @@
 services:
   alipan-tv-token:
-    build: .
+    image: ghcr.io/lucasjx/alipan-tv-token:latest
     container_name: alipan-tv-token
     ports:
       - "5800:5800"

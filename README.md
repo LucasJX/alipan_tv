@@ -10,63 +10,36 @@
 - 提供 OAuth 刷新接口，供 alist、播放器等第三方程序调用
 - 纯本地运行，数据不经第三方服务器
 
-## 环境要求
+## 快速部署（Docker）
 
-- Python 3.10+
-- [uv](https://docs.astral.sh/uv/)（推荐）或 pip
-
-## 安装
-
-### 方式一：uv（推荐）
+无需安装 Python，一行命令启动：
 
 ```bash
-git clone git@github.com:<你的用户名>/alipan-tv-token.git
-cd alipan-tv-token
-uv sync
-```
-
-### 方式二：pip
-
-```bash
-git clone git@github.com:<你的用户名>/alipan-tv-token.git
-cd alipan-tv-token
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-## 运行
-
-### 方式一：Docker Compose（推荐）
-
-```bash
-git clone git@github.com:LucasJX/alipan_tv.git
-cd alipan_tv
 docker compose up -d
 ```
 
 启动后浏览器打开 http://localhost:5800
 
-自定义端口：修改 `docker-compose.yml` 中的端口映射，如 `"8080:5800"`
+### 自定义端口
 
-### 方式二：uv
+修改 `docker-compose.yml` 中的端口映射：
 
-```bash
-uv run app.py
+```yaml
+ports:
+  - "8080:5800"   # 改成你想要的端口
 ```
 
-### 方式三：pip
+### 停止服务
 
 ```bash
-.venv/bin/python app.py
+docker compose down
 ```
 
-启动后浏览器打开 http://localhost:5800
-
-可通过环境变量 `PORT` 自定义端口：
+### 更新版本
 
 ```bash
-PORT=8080 uv run app.py
+docker compose pull
+docker compose up -d
 ```
 
 ## 第三方程序接入
@@ -104,19 +77,6 @@ Content-Type: application/json
 - [Flask](https://flask.palletsprojects.com/) — Web 框架
 - [PyCryptodome](https://pycryptodome.readthedocs.io/) — AES 解密
 - [qrcode](https://pypi.org/project/qrcode/) — 二维码生成
-
-## 项目结构
-
-```
-alipan-tv-token/
-├── app.py              # Flask 后端（API 路由 + AES 解密）
-├── index.html          # 前端页面
-├── Dockerfile          # Docker 镜像定义
-├── docker-compose.yml  # Docker Compose 编排
-├── requirements.txt    # Python 依赖
-├── pyproject.toml      # 项目配置
-└── README.md
-```
 
 ## 致谢
 
