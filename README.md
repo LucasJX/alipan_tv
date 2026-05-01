@@ -12,7 +12,19 @@
 
 ## 快速部署（Docker，推荐）
 
-无需安装 Python，一行命令启动：
+无需安装 Python，创建 `docker-compose.yml`：
+
+```yaml
+services:
+  alipan-tv-token:
+    image: ghcr.io/lucasjx/alipan-tv-token:latest
+    container_name: alipan-tv-token
+    ports:
+      - "5800:5800"
+    restart: unless-stopped
+```
+
+然后一行命令启动：
 
 ```bash
 docker compose up -d
@@ -22,12 +34,7 @@ docker compose up -d
 
 ### 自定义端口
 
-修改 `docker-compose.yml` 中的端口映射：
-
-```yaml
-ports:
-  - "8080:5800"   # 改成你想要的端口
-```
+修改 `docker-compose.yml` 中的端口映射，如 `"8080:5800"`
 
 ### 停止 / 更新
 
