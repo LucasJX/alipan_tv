@@ -17,7 +17,7 @@
 ```yaml
 services:
   alipan-tv-token:
-    image: ghcr.io/lucasjx/alipan-tv-token:latest
+    image: lucasjx/alipan-tv-token:latest
     container_name: alipan-tv-token
     ports:
       - "5800:5800"
