@@ -1,0 +1,15 @@
+[project]
+name = "alipan-tv-token"
+version = "1.0.0"
+description = "阿里云盘 TV Token 获取工具"
+requires-python = ">=3.10"
+dependencies = [
+    "flask",
+    "pycryptodome",
+    "requests",
+    "qrcode[pil]",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
