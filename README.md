@@ -37,11 +37,27 @@ pip install -r requirements.txt
 
 ## 运行
 
-```bash
-# uv
-uv run app.py
+### 方式一：Docker Compose（推荐）
 
-# pip
+```bash
+git clone git@github.com:LucasJX/alipan_tv.git
+cd alipan_tv
+docker compose up -d
+```
+
+启动后浏览器打开 http://localhost:5800
+
+自定义端口：修改 `docker-compose.yml` 中的端口映射，如 `"8080:5800"`
+
+### 方式二：uv
+
+```bash
+uv run app.py
+```
+
+### 方式三：pip
+
+```bash
 .venv/bin/python app.py
 ```
 
@@ -95,6 +111,8 @@ Content-Type: application/json
 alipan-tv-token/
 ├── app.py              # Flask 后端（API 路由 + AES 解密）
 ├── index.html          # 前端页面
+├── Dockerfile          # Docker 镜像定义
+├── docker-compose.yml  # Docker Compose 编排
 ├── requirements.txt    # Python 依赖
 ├── pyproject.toml      # 项目配置
 └── README.md

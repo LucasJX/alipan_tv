@@ -1,0 +1,7 @@
+services:
+  alipan-tv-token:
+    build: .
+    container_name: alipan-tv-token
+    ports:
+      - "5800:5800"
+    restart: unless-stopped
